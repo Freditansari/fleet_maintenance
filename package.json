@@ -1,0 +1,30 @@
+{
+  "name": "fleet_management",
+  "version": "0.0.1",
+  "description": "this is fleet management API server end points",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Freditansari/fleet_maintenance.git"
+  },
+  "keywords": [
+    "fleet",
+    "maintenance",
+    "node.js"
+  ],
+  "author": "fredi tansari",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Freditansari/fleet_maintenance/issues"
+  },
+  "homepage": "https://github.com/Freditansari/fleet_maintenance#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.16.4",
+    "mongoose": "^5.5.8",
+    "passport": "^0.4.0"
+  }
+}
