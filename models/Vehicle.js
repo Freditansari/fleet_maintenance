@@ -140,4 +140,4 @@ const VehicleSchema = new Schema({
   
 });
 
-module.exports = Vehicle = mongoose.model('vehicles',VehicleSchema);
+module.exports = Vehicles = mongoose.model('vehicles',VehicleSchema);
