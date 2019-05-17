@@ -43,6 +43,10 @@ const VehicleSchema = new Schema({
         repairDate:{
             type: Date,
             default: Date.now
+        }, 
+        isFinished: {
+            type: Boolean,
+            default: false
         }   
     }],
 
@@ -67,7 +71,12 @@ const VehicleSchema = new Schema({
             type:Date
         },
 
-        isDone: {
+        createdDate:{
+            type:Date,
+            default: Date.now
+        },
+
+        isFinished: {
             type: Boolean
         },
 
@@ -119,7 +128,13 @@ const VehicleSchema = new Schema({
         fuelPrice:{
             type:Number,
             required: true
+        },
+        user:{
+            type: Schema.Types.ObjectId,
+            ref:'users',
+            required: true
         }
+
     }]
 
   
