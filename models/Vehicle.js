@@ -11,14 +11,40 @@ const VehicleSchema = new Schema({
       type: String,
       required: true
     },
+
+    Manufacturer:{
+        type:String
+    },
+    Make:{
+        type: String
+    },
     date: {
       type: Date,
       default: Date.now
+    },
+    isDecomissioned:{
+        type: Boolean,
+        default: false
     },
     isOperational:{
         type: Boolean,
         default: true
     },
+
+    breakDowns:[{
+        reasons:{
+            type: String,
+            required: true
+        },
+        date:{
+            type:Date,
+            default: Date.now
+        },
+        repairDate:{
+            type: Date,
+            default: Date.now
+        }   
+    }],
 
     machineHours:[{
         machineHour: {
@@ -81,7 +107,7 @@ const VehicleSchema = new Schema({
 
     }],
 
-    Fuel:[{
+    fuelsConsumptions:[{
         fuelingDate: {
             type:Date,
             default: Date.now
