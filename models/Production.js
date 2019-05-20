@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 
-const Production = new Schema({
+const ProductionSchema = new Schema({
     Date:{
         type: Date,
         default: Date.now
@@ -22,4 +22,4 @@ const Production = new Schema({
     }
 });
 
-module.exports = Roles = mongoose.model('roles', RolesSchema);
+module.exports = Production = mongoose.model('productions', ProductionSchema);
