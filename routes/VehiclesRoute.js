@@ -26,10 +26,10 @@ router.post('/add',passport.authenticate('jwt', { session: false }), (req, res)=
 
     //add a new vehicle:
     const newVehicle = new Vehicle({
-        VehicleName : req.body.VehicleName,
-        VehicleType: req.body.VehicleType,
-        Manufacturer: req.body.Manufacturer,
-        Make: req.body.Make,
+        VehicleName : req.body.vehicleName,
+        VehicleType: req.body.vehicleType,
+        Manufacturer: req.body.manufacturer,
+        Make: req.body.make,
         date: req.body.date,
         isDecommisioned: req.body.isDecommisioned,
         isOperational: req.body.isOperational
