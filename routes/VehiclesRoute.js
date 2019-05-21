@@ -18,11 +18,22 @@ router.get('/test', (req, res) => res.json({ msg: 'vehicle Works' }));
 
 
 // @route   POST api/vehicle/add
-// @desc    Create, add or edit vehicle
+// @desc    add vehicle
 // @access  Private
+//Fields:
+/**
+ *      vehicleName,
+        vehicleType,
+        manufacturer,
+        make,
+        date,
+        isDecommisioned,
+        isOperational
+ * 
+ */
 router.post('/add',passport.authenticate('jwt', { session: false }), (req, res)=>{
  
-    // check validations
+    // todo: check validations
 
     //add a new vehicle:
     const newVehicle = new Vehicle({

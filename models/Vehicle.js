@@ -62,60 +62,6 @@ const VehicleSchema = new Schema({
         }
     }],
 
-    repairOrders:[{
-        
-        startDate:{
-            type:Date
-        },
-        dueDate:{
-            type:Date
-        },
-
-        createdDate:{
-            type:Date,
-            default: Date.now
-        },
-
-        isFinished: {
-            type: Boolean
-        },
-
-        user:{
-            type: Schema.Types.ObjectId,
-            ref:'users',
-            required: true
-        },
-
-        
-
-        workDescriptions:[{
-            workDescriptions:{
-                type: String,
-                required: true
-            },
-            manHours:{
-                type: Number
-            }
-        }],
-
-        parts:[{
-            qty:{
-                type: Number
-            },
-            partNumber:{
-                type: String
-            },
-            unitPrice:{
-                type:Number
-            },
-            totalPrice:{
-                type:Number
-            }
-        }]
-
-
-    }],
-
     fuelsConsumptions:[{
         fuelingDate: {
             type:Date,
