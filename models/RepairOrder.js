@@ -3,9 +3,6 @@ const Schema = mongoose.Schema;
 
 
 const RepairOrdersSchema = new Schema({
- 
- repairOrders:[{
-        
         startDate:{
             type:Date
         },
@@ -25,6 +22,11 @@ const RepairOrdersSchema = new Schema({
         user:{
             type: Schema.Types.ObjectId,
             ref:'users',
+            required: true
+        },
+        vehicle: {
+            type: Schema.Types.ObjectId,
+            ref: 'vehicles',
             required: true
         },
 
@@ -57,7 +59,7 @@ const RepairOrdersSchema = new Schema({
         }]
 
 
-    }]
+   
 });
 
 module.exports = RepairOrders = mongoose.model('repairorders',RepairOrdersSchema);

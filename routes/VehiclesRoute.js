@@ -34,6 +34,8 @@ router.get('/test', (req, res) => res.json({ msg: 'vehicle Works' }));
 router.post('/add',passport.authenticate('jwt', { session: false }), (req, res)=>{
  
     // todo: check validations
+    //can enter 2 same vehiclename. (it should be unique)
+
 
     //add a new vehicle:
     const newVehicle = new Vehicle({
