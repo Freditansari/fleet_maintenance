@@ -17,6 +17,25 @@ const Vehicle = require('../models/Vehicle');
 router.get('/test', (req, res) => res.json({ msg: 'vehicle Works' }));
 
 
+// @route   POST api/vehicle/get
+// @desc    get vehicles
+// @access  Private
+//Fields:
+/**
+ * 
+ * 
+ */
+router.get('/get',passport.authenticate('jwt', { session: false }), (req, res)=>{
+        Vehicle.find({})
+        .then(vehicles=>{
+            if(!vehicles){
+                res.status(404).json("no vehicles available")
+            }
+            res.json(vehicles)
+        }).catch(errors=>res.status(500).json(errors))
+});
+
+
 // @route   POST api/vehicle/add
 // @desc    add vehicle
 // @access  Private
@@ -34,7 +53,7 @@ router.get('/test', (req, res) => res.json({ msg: 'vehicle Works' }));
 router.post('/add',passport.authenticate('jwt', { session: false }), (req, res)=>{
  
     // todo: check validations
-    //can enter 2 same vehiclename. (it should be unique)
+    //can enter 2 same vehicle name. (it should be unique)
 
 
     //add a new vehicle:

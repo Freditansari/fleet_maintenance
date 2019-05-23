@@ -2,16 +2,35 @@
 
 const express = require('express');
 const router = express.Router();
-const jwt = require('jsonwebtoken');
 const keys = require('../config/mongodb');
 const passport = require('passport');
 
 const repairOrder = require('../models/RepairOrder')
 
 //todo: 
+
+
+// @route   GET api/repairorders/get/:repair_id
+// @desc    get a repair order
+// @access  Private
 /**
- * -get repair orders
- *  */ 
+ *     n/a because it use parameter         
+ * 
+ */
+router.get('/get/:repair_id',passport.authenticate('jwt', { session: false }), (req, res)=>{
+
+    // console.log(req.params.repair_id);
+    repairOrder.findById({_id: req.params.repair_id})
+    .then((repairorder=>{
+        if(!repairorder){
+            res.status(400).json({success:false});
+        }
+
+        res.json(repairorder);
+    })).catch(error=>res.status(500).json(error));
+
+});
+
 
 // @route   POST api/repairorders/add
 // @desc    add repair orders,
@@ -26,6 +45,8 @@ const repairOrder = require('../models/RepairOrder')
  * 
  */
 router.post('/add',passport.authenticate('jwt', { session: false }), (req, res)=>{
+
+    //todo: validation
 
 
         const newRepairOrder=new repairOrder({
@@ -44,7 +65,7 @@ router.post('/add',passport.authenticate('jwt', { session: false }), (req, res)=
         
   
 
-})
+});
 
 // @route   POST api/repairorders/parts/add
 // @desc    add  parts repair orders,
@@ -52,14 +73,16 @@ router.post('/add',passport.authenticate('jwt', { session: false }), (req, res)=
 //
 /**
  *  FIELDS:
- *          repairOrders_id
-             
+ *          repair_id,
+ *          partNumber
+ *          unitPrice
+ *          qty
+ *          totalPrice
  * 
  */
-
 router.post('/parts/add',passport.authenticate('jwt', { session: false }), (req, res)=>{
 
-    // Vehicle.findOne({_id : req.body.vehicle_id}).then(vehicle=>{
+    //todo validation
 
     repairOrder.findOne({_id : req.body.repair_id}).then(repairOrder =>{
         const newParts={
@@ -70,30 +93,13 @@ router.post('/parts/add',passport.authenticate('jwt', { session: false }), (req,
         };
 
      
-        repairOrder.parts.unshift(newParts);
+        repairOrder.parts.push(newParts);
         repairOrder.save()
         .then(repairOrder => res.json(repairOrder))
         .catch(error => res.status(500).json(error));
 
 
     })
-
-    
-
-      
-
-    //    vehicle.repairOrders.findOne({_id: req.body.repairOrders_id}).then(repairOrder =>{
-
-            
-
-    //         repairOrder.parts.unshift(newParts);
-    //         console.log(repairOrder);
-    //    }).catch(error=> res.status(500).json(error))
-        
-    //     // vehicle.repairOrders.parts.unshift(newParts);
-    //       vehicle.save().then(vehicle=> res.json(vehicle));
-
-    // }).catch(error=> res.status(500).json(error))
 
 });
 module.exports = router;
