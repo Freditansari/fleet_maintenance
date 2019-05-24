@@ -9,7 +9,7 @@ const passport = require('passport');
 const Vehicle = require('../models/Vehicle');
 
 
-//todo import validators
+//todo do validators
 
 // @route   GET api/vehicle/test
 // @desc    Tests vehicle route

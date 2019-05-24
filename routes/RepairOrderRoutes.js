@@ -2,7 +2,6 @@
 
 const express = require('express');
 const router = express.Router();
-const keys = require('../config/mongodb');
 const passport = require('passport');
 
 const repairOrder = require('../models/RepairOrder')
@@ -52,6 +51,7 @@ router.post('/add',passport.authenticate('jwt', { session: false }), (req, res)=
         const newRepairOrder=new repairOrder({
             startDate: req.body.startDate,
             dueDate: req.body.dueDate,
+            endDate: req.body.endDate,
             createdDate: req.body.createdDate,
             isFinished: req.body.isFinished,
             user: req.user.id, 
@@ -102,4 +102,58 @@ router.post('/parts/add',passport.authenticate('jwt', { session: false }), (req,
     })
 
 });
-module.exports = router;
+
+// @route   POST api/repairorders/parts/delete
+// @desc    delete part in repair orders,
+// @access  Private
+//
+/**
+ *  FIELDS:
+ *          repairorder_id
+ * 
+ */
+
+router.post('/parts/delete',passport.authenticate('jwt', { session: false }), (req, res)=>{
+    repairOrder.findOneAndDelete({_id: req.body.repairorder_id})
+    .then(repairorder=> {
+        if(!repairorder){
+            res.status(404).json({success:false});
+        }
+        res.status(200).json(repairorder);
+    }).catch(error=> 
+        res.status(500).json({success:false, message: error}));
+});
+
+
+
+ // @route   POST api/repairorders/update
+// @desc    delete parts in repair orders,
+// @access  Private
+//
+/**
+ *  FIELDS:
+ *  tbd
+ */
+
+ router.post('/update/:repair_id',passport.authenticate('jwt', { session: false }), (req, res)=>{
+     //todo validation
+
+     repairOrder.findOneAndUpdate({_id: req.params.repair_id}, req.body,{new:true})
+     .then((repairorder)=>{
+         res.status(200).json(repairorder);
+     })
+     .catch(error=>res.status(500)
+     .json({success:false, message: error}));
+ });
+
+
+  // @route   POST api/repairorders/update
+// @desc    delete parts in repair orders,
+// @access  Private
+//
+/**
+ *  FIELDS:
+ *  tbd
+ */
+
+ module.exports = router;

@@ -9,6 +9,9 @@ const RepairOrdersSchema = new Schema({
         dueDate:{
             type:Date
         },
+        endDate:{
+            type:Date
+        },
 
         createdDate:{
             type:Date,
