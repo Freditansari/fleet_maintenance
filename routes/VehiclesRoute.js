@@ -73,4 +73,49 @@ router.post('/add',passport.authenticate('jwt', { session: false }), (req, res)=
 }); 
 
 
+// @route   POST api/vehicle/breakdowns/add
+// @desc    add vehicle breakdowns
+// @access  Private
+//Fields:
+/**
+    vehicle_id
+    reasons
+
+ * 
+ */
+router.post('/breakdowns/add',passport.authenticate('jwt', { session: false }), (req, res)=>{
+    Vehicle.findOne({_id: req.body.vehicle_id})
+    .then(vehicle=>{
+        // res.status(200).json(vehicle);
+
+        const newBreakDowns = {
+            reasons: req.body.reasons
+        }
+
+        vehicle.isOperational=false;
+
+        vehicle.breakDowns.push(newBreakDowns);
+        // res.status(200).json(vehicle);
+        vehicle.save()
+        .then(vehicle=>res.json(vehicle))
+        .catch(error => res.status(500).json(error));
+
+
+    }) 
+}); 
+
+// @route   POST api/vehicle/breakdowns/update
+// @desc    update vehicle breakdowns
+// @access  Private
+//Fields:
+/**
+    vehicle_id
+    reasons
+
+ * 
+ */
+
+
+
+
 module.exports = router;

@@ -32,6 +32,11 @@ const RepairOrdersSchema = new Schema({
             ref: 'vehicles',
             required: true
         },
+        assignedTo: {
+            type:Schema.Types.ObjectId,
+            ref:' users',
+            required:true
+        },
 
         
 

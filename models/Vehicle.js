@@ -41,8 +41,7 @@ const VehicleSchema = new Schema({
             default: Date.now
         },
         repairDate:{
-            type: Date,
-            default: Date.now
+            type: Date
         }, 
         isFinished: {
             type: Boolean,

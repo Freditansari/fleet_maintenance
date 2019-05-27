@@ -40,6 +40,7 @@ router.get('/get/:repair_id',passport.authenticate('jwt', { session: false }), (
             dueDate,
             createdDate,
             isFinished,
+            assignedTo
              
  * 
  */
@@ -55,7 +56,8 @@ router.post('/add',passport.authenticate('jwt', { session: false }), (req, res)=
             createdDate: req.body.createdDate,
             isFinished: req.body.isFinished,
             user: req.user.id, 
-            vehicle: req.body.vehicle_id
+            vehicle: req.body.vehicle_id,
+            assignedTo: req.body.assignedTo
            
 
         });
@@ -78,6 +80,7 @@ router.post('/add',passport.authenticate('jwt', { session: false }), (req, res)=
  *          unitPrice
  *          qty
  *          totalPrice
+ *          assignedTo
  * 
  */
 router.post('/parts/add',passport.authenticate('jwt', { session: false }), (req, res)=>{
@@ -110,6 +113,11 @@ router.post('/parts/add',passport.authenticate('jwt', { session: false }), (req,
 /**
  *  FIELDS:
  *          repairorder_id
+ *          partNumber
+ *          unitPrice
+ *          qty
+ *          totalPrice
+ *          assignedTo
  * 
  */
 
@@ -127,7 +135,7 @@ router.post('/parts/delete',passport.authenticate('jwt', { session: false }), (r
 
 
  // @route   POST api/repairorders/update
-// @desc    delete parts in repair orders,
+// @desc    update repair orders,
 // @access  Private
 //
 /**
@@ -147,13 +155,5 @@ router.post('/parts/delete',passport.authenticate('jwt', { session: false }), (r
  });
 
 
-  // @route   POST api/repairorders/update
-// @desc    delete parts in repair orders,
-// @access  Private
-//
-/**
- *  FIELDS:
- *  tbd
- */
 
  module.exports = router;
