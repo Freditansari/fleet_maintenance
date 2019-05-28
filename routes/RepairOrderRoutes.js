@@ -155,6 +155,42 @@ router.post('/parts/delete',passport.authenticate('jwt', { session: false }), (r
      .json({success:false, message: error}));
  });
 
+ 
+ 
+// @route   POST api/repairorders/workdescriptions/add
+// @desc    add work descriptions,
+// @access  Private
+//
+/**
+ *  FIELDS:
+ *  tbd
+ */
+ router.post('/workdescriptions/add',passport.authenticate('jwt', { session: false }), (req, res)=>{
+    //todo validation
+
+    repairOrder.findOne({_id: req.body.repairorder_id})
+    .then(repairorder =>{
+
+        const newWorkDescriptions={
+
+            workDescriptions: req.body.workdescriptions,
+            manHours: req.body.manHours
+
+        };
+
+        repairorder.workDescriptions.push(newWorkDescriptions);
+        repairorder.save()
+        .then(repairOrder => res.json(repairOrder))
+        .catch(error => res.status(500).json(error));
+
+
+
+
+    })
+    .catch(error=>res.status(500)
+    .json({success:false, message: error}));
+});
+
 
 
  module.exports = router;
