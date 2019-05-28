@@ -7,6 +7,7 @@ const passport = require('passport');
 const repairOrder = require('../models/RepairOrder')
 
 //todo: 
+//add and delete work descriptions
 
 
 // @route   GET api/repairorders/get/:repair_id

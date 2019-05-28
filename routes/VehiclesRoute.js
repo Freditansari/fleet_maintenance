@@ -114,6 +114,38 @@ router.post('/breakdowns/add',passport.authenticate('jwt', { session: false }), 
 
  * 
  */
+router.post('/breakdowns/update',passport.authenticate('jwt', { session: false }), (req, res)=>{
+    Vehicle.findOne({_id: req.body.vehicle_id})
+    .then(vehicle=>{
+        // res.status(200).json(vehicle);
+
+        vehicle.breakDowns.findOne({_id:req.body.breakDowns_id})
+        .then(breakdown =>{
+            const breakdownsUpdate = {
+                repairDate: Date.now(),
+                isFinished: true
+    
+            }
+            breakdown.save()
+        }
+          
+    
+        ).catch(error =>res.status(500).json(error));
+
+       
+        vehicle.isOperational=true;
+
+        vehicle.breakDowns.push(newBreakDowns);
+        // res.status(200).json(vehicle);
+        vehicle.save()
+        .then(vehicle=>res.json(vehicle))
+        .catch(error => res.status(500).json(error));
+
+
+    }) 
+}); 
+
+
 
 
 

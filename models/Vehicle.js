@@ -31,56 +31,9 @@ const VehicleSchema = new Schema({
         default: true
     },
 
-    breakDowns:[{
-        reasons:{
-            type: String,
-            required: true
-        },
-        date:{
-            type:Date,
-            default: Date.now
-        },
-        repairDate:{
-            type: Date
-        }, 
-        isFinished: {
-            type: Boolean,
-            default: false
-        }   
-    }],
+   
 
-    machineHours:[{
-        machineHour: {
-            type: Number, 
-            required: true
-        },
-
-        date:{
-            type: Date,
-            default: Date.now
-        }
-    }],
-
-    fuelsConsumptions:[{
-        fuelingDate: {
-            type:Date,
-            default: Date.now
-        },
-        fuelAmount: {
-            type:Number,
-            required: true
-        },
-        fuelPrice:{
-            type:Number,
-            required: true
-        },
-        user:{
-            type: Schema.Types.ObjectId,
-            ref:'users',
-            required: true
-        }
-
-    }]
+    
 
   
 });
