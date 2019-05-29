@@ -81,7 +81,7 @@ router.post('/add',passport.authenticate('jwt', { session: false }), (req, res)=
  *          unitPrice
  *          qty
  *          totalPrice
- *          assignedTo
+ *         
  * 
  */
 router.post('/parts/add',passport.authenticate('jwt', { session: false }), (req, res)=>{
@@ -114,21 +114,22 @@ router.post('/parts/add',passport.authenticate('jwt', { session: false }), (req,
 /**
  *  FIELDS:
  *          repairorder_id
- *          partNumber
- *          unitPrice
- *          qty
- *          totalPrice
- *          assignedTo
+ *          parts_id
  * 
  */
 
 router.post('/parts/delete',passport.authenticate('jwt', { session: false }), (req, res)=>{
-    repairOrder.findOneAndDelete({_id: req.body.repairorder_id})
+    repairOrder.findOne({_id: req.body.repairorder_id})
     .then(repairorder=> {
-        if(!repairorder){
-            res.status(404).json({success:false});
-        }
-        res.status(200).json(repairorder);
+
+        const removeIndex = repairorder.parts
+        .map(part => part.id)
+        .indexOf(req.body.parts_id);
+
+        repairorder.parts.splice(removeIndex,1);
+
+        repairorder.save().then(ro=> res.json(ro));
+     
     }).catch(error=> 
         res.status(500).json({success:false, message: error}));
 });
@@ -199,8 +200,8 @@ router.post('/parts/delete',passport.authenticate('jwt', { session: false }), (r
 //
 /**
  *  FIELDS:
- * repairorder_id
-
+ *      repairorder_id
+ *      workDescriptions_id
  */
 router.post('/workdescriptions/remove',passport.authenticate('jwt', { session: false }), (req, res)=>{
     //todo validation
