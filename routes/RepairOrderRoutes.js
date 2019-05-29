@@ -163,7 +163,9 @@ router.post('/parts/delete',passport.authenticate('jwt', { session: false }), (r
 //
 /**
  *  FIELDS:
- *  tbd
+ *  repairorder_id
+ *  workdescriptions
+ *  manHours
  */
  router.post('/workdescriptions/add',passport.authenticate('jwt', { session: false }), (req, res)=>{
     //todo validation
@@ -186,6 +188,33 @@ router.post('/parts/delete',passport.authenticate('jwt', { session: false }), (r
 
 
 
+    })
+    .catch(error=>res.status(500)
+    .json({success:false, message: error}));
+});
+
+// @route   POST api/repairorders/workdescriptions/remove
+// @desc    remove a work descriptions,
+// @access  Private
+//
+/**
+ *  FIELDS:
+ * repairorder_id
+
+ */
+router.post('/workdescriptions/remove',passport.authenticate('jwt', { session: false }), (req, res)=>{
+    //todo validation
+
+    repairOrder.findOne({_id: req.body.repairorder_id})
+    .then(repairorder =>{
+
+        const removeIndex = repairorder.workDescriptions
+        .map(workDesc => workDesc.id)
+        .indexOf(req.body.workDescriptions_id)
+
+        repairorder.workDescriptions.splice(removeIndex,1);
+
+        repairorder.save().then(ro => res.json(ro));
     })
     .catch(error=>res.status(500)
     .json({success:false, message: error}));
