@@ -93,7 +93,7 @@ router.post('/parts/add',passport.authenticate('jwt', { session: false }), (req,
             partNumber : req.body.partNumber,
             unitPrice: req.body.unitPrice,
             qty: req.body.qty,
-            totalPrice: req.body.totalPrice
+            totalPrice: req.body.unitPrice * req.body.qty
         };
 
      

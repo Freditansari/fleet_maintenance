@@ -14,13 +14,15 @@ mongoose.connect(db, { useFindAndModify: false, useNewUrlParser:true }).then(()=
 const users = require('./routes/usersRoute');
 const vehicle = require('./routes/VehiclesRoute')
 const repairOrder = require('./routes/RepairOrderRoutes');
+const breakDowns = require('./routes/BreakDownsRoutes');
 
 //path is used for production build
 const path = require('path');
 
 app.use('/api/users', users);
 app.use('/api/vehicle', vehicle);
-app.use('/api/repairorders',repairOrder)
+app.use('/api/repairorders',repairOrder);
+app.use('/api/breakdowns',breakDowns);
 
 require('./config/passport')(passport);
 
