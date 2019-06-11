@@ -8,16 +8,22 @@ const breakDowns = require('../models/Breakdowns');
 
 router.get('/test', (req, res) => res.json({ msg: 'breakdowns Works' }));
 
-// @route   GET api/breakdowns/get
-// @desc    get a vehicle breakdowns
+// @route   Post api/breakdowns/add
+// @desc    add a vehicle breakdowns
 // @access  Private
 /**
- *     n/a because it use parameter         
+ *     
  * 
  */
-router.get('/get/',passport.authenticate('jwt', { session: false }), (req, res)=>{
+router.post('/add',passport.authenticate('jwt', { session: false }), (req, res)=>{
 
     // console.log(req.params.repair_id);
+
+    const newBreakDowns = new breakDowns({
+        reasons: req.body.reasons,
+        user: req.user.id,
+        vehicle: req.vehicle.id
+    });
    
 
 });
