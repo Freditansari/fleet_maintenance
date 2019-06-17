@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 
 const breakDownsSchema = new Schema({
-    breakDowns:{
+    
         reasons:{
             type: String,
             required: true
@@ -29,7 +29,7 @@ const breakDownsSchema = new Schema({
             ref:'vehicle',
             required: true
         },   
-    }
+    
       
 });
 
