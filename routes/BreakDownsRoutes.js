@@ -6,7 +6,6 @@ const passport = require('passport');
 
 const breakDown = require('../models/Breakdowns');
 
-router.get('/test', (req, res) => res.json({ msg: 'breakdowns Works' }));
 
 // @route   Post api/breakdowns/add
 // @desc    add a vehicle breakdowns
