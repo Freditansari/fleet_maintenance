@@ -18,6 +18,8 @@ router.get('/test', (req, res) => res.json({ msg: 'breakdowns Works' }));
  * created: Fredy   
  * tested by:
  * notes:
+ * 
+ * functional test ok 
  * fields required:
  * 
  *      reasons,
@@ -43,15 +45,18 @@ router.post('/add',passport.authenticate('jwt', { session: false }), (req, res)=
     .catch(error=> res.status(500).json(error));
 });
 
-// @route   Post api/breakdowns/edit
-// @desc    add a vehicle breakdowns
+// @route   Post api/breakdowns/update
+// @desc    update a vehicle breakdowns
 // @access  Private
 /**
+ * 
+ * TODO
  * what does it do:
  * 
  * created:
- * tested by:
+ * tested by: 
  * notes:
+ * functional test ok 
  * fields required:
  *      breakDown_id
  *     
@@ -59,11 +64,42 @@ router.post('/add',passport.authenticate('jwt', { session: false }), (req, res)=
  */
 
 router.post('/update',passport.authenticate('jwt', { session: false }), (req, res)=>{
+    if(req.body.isFinished){
+  
+        req.body.repairDate = Date.now();
+    }
 
-    breakDown.findByIdAndUpdate({_id: req.body.breakDown_id}, req.body)
+    breakDown.findByIdAndUpdate({_id: req.body.breakDown_id}, req.body, {new :true})
     .then((breakdown) => res.json(breakdown))
     .catch(error => res.status(500).json({message:error}))
 });
+
+// @route   Post api/breakdowns/remove
+// @desc    remove a vehicle breakdowns
+// @access  Private
+/**
+ * TODO
+ * what does it do:
+ * 
+ * created:
+ * tested by:
+ * notes:
+ * functional test ok 
+ * fields required:
+ *      breakDown_id
+ *     
+ * 
+ */
+
+router.post('/remove',passport.authenticate('jwt', { session: false }), (req, res)=>{
+
+
+    breakDown.findByIdAndRemove({_id: req.body.breakDown_id})
+    .then(res.json({message: "successfully removed: " + req.body.breakDown_id}))
+    .catch(error => res.status(500).json({message:error}))
+});
+
+
 
 
 
