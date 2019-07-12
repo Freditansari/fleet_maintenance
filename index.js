@@ -15,6 +15,7 @@ const users = require('./routes/usersRoute');
 const vehicle = require('./routes/VehiclesRoute')
 const repairOrder = require('./routes/RepairOrderRoutes');
 const breakDowns = require('./routes/BreakDownsRoutes');
+const fuelConsumptions = require('./routes/FuelConsumptionsRoutes');
 
 //path is used for production build
 const path = require('path');
@@ -23,6 +24,7 @@ app.use('/api/users', users);
 app.use('/api/vehicle', vehicle);
 app.use('/api/repairorders',repairOrder);
 app.use('/api/breakdowns',breakDowns);
+app.use('/api/fuelconsumptions',fuelConsumptions);
 
 require('./config/passport')(passport);
 

@@ -16,6 +16,9 @@ const fuelConsumptionsSchema = new Schema({
             type:Number,
             required: true
         },
+        fuelTotal:{
+            type:Number
+        },
        user:{
             type: Schema.Types.ObjectId,
             ref:'users',

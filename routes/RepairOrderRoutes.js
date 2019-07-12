@@ -64,7 +64,10 @@ router.post('/add',passport.authenticate('jwt', { session: false }), (req, res)=
         });
         
 
-        newRepairOrder.save().then(repairOrder => res.json(repairOrder)).catch(error => res.status(500).json(error));
+        newRepairOrder
+        .save()
+        .then(repairOrder => res.json(repairOrder))
+        .catch(error => res.status(500).json(error));
         
   
 
