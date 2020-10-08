@@ -60,9 +60,9 @@ const NavBar = props => {
                         Contacts and Users
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Create Reminders</a>
-                        <a class="dropdown-item" href="#">Manage Reminders</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="#">New User</a>
+                        <a class="dropdown-item" href="#">Manage Users</a>
+                        
                         </div>
                     </li>
 
