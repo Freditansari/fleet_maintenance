@@ -4,7 +4,9 @@ import './App.css';
 // import SideNav from './Components/SideNav'
 import NavBar from './Components/NavBar'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom"
+import Loginform from './Components/Login/Loginform'
 import Dashboard from './Components/Dashboard/Dashboard'
+
 
 function App() {
   return (
@@ -13,6 +15,7 @@ function App() {
       <header >
         <NavBar />
         <Route exact path="/" component={Dashboard} />
+        <Route exact path="/login" component={Loginform} />
       </header>
       <body>
         

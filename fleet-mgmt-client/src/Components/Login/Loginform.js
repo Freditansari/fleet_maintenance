@@ -16,10 +16,13 @@ const Loginform = props => {
                 </div>
                 <div class="checkbox mb-3">
                     <label>
-                    <input type="checkbox" value="remember-me" /><span>Remember me</span> 
+                    <input type="checkbox" value="remember-me" class="mt-3" /><span> Remember me</span> 
                     </label>
                 </div>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                <div class="container">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                </div>
+               
                 {/* <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p> */}
             </form>
 
