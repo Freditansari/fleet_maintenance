@@ -114,9 +114,6 @@ router.post('/remove',passport.authenticate('jwt', { session: false }), (req, re
  */
 
 router.post('/getfuelconsumptions',passport.authenticate('jwt', { session: false }), (req, res)=>{
-
-    
-
     fuelConsumption.find({_id})
 });
 

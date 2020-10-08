@@ -1,0 +1,12 @@
+.card-size{
+    width: 350px;
+    height: 250px;
+}
+
+.maintenance-warning{
+    color: #f0ad4e ;
+}
+
+.maintenance-danger{
+    color : #d9534f 
+}
