@@ -21,7 +21,7 @@ const NavBar = props => {
                         Vehicle
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">New Vehicle</a>
+                        <a class="dropdown-item" href="/newVehicle">New Vehicle</a>
                         <a class="dropdown-item" href="#">Another action</a>
                         <a class="dropdown-item" href="#">Something else here</a>
                         </div>
@@ -33,6 +33,28 @@ const NavBar = props => {
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="#">Fuel Logs</a>
                         <a class="dropdown-item" href="#">Another action</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Maintenance
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Create Maintenance</a>
+                        <a class="dropdown-item" href="#">Manage Maintenance</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Inventory
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Create Reminders</a>
+                        <a class="dropdown-item" href="#">Manage Reminders</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -60,22 +82,12 @@ const NavBar = props => {
                         Contacts and Users
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Create Reminders</a>
-                        <a class="dropdown-item" href="#">Manage Reminders</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="/newuser">New User</a>
+                        <a class="dropdown-item" href="#">Manage Users</a>
+                        
                         </div>
                     </li>
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Inventory
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Create Reminders</a>
-                        <a class="dropdown-item" href="#">Manage Reminders</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="/login">Login </a>
                     </li>
