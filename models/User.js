@@ -15,12 +15,14 @@ const UserSchema = new Schema({
       type: String,
       required: true
     },
-    avatar: {
-      type: String
-    },
+    // avatar: {
+    //   type: String
+    // },
     role:{
       type: String, 
-      required:true  
+      enum:['Employee', 'Admin'],
+      required:true , 
+      default: 'Employee'
     },
     date: {
       type: Date,

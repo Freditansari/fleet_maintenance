@@ -12,19 +12,12 @@ app.use(bodyParser.json());
 mongoose.connect(db, { useFindAndModify: false, useNewUrlParser:true }).then(()=>console.log('Monggo db connected')).catch(err=>console.log(err));
 
 const users = require('./routes/usersRoute');
-const vehicle = require('./routes/VehiclesRoute')
-const repairOrder = require('./routes/RepairOrderRoutes');
-const breakDowns = require('./routes/BreakDownsRoutes');
-const fuelConsumptions = require('./routes/FuelConsumptionsRoutes');
 
 //path is used for production build
 const path = require('path');
 
 app.use('/api/users', users);
-app.use('/api/vehicle', vehicle);
-app.use('/api/repairorders',repairOrder);
-app.use('/api/breakdowns',breakDowns);
-app.use('/api/fuelconsumptions',fuelConsumptions);
+
 
 require('./config/passport')(passport);
 

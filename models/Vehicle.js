@@ -3,39 +3,31 @@ const Schema = mongoose.Schema;
 
 
 const VehicleSchema = new Schema({
-    VehicleName: {
+    name: {
       type: String,
       required: true
     },
-    VehicleType: {
+    type: {
+      type: String,
+      enum: ['Excavator', 'Light Vehicle', 'Bulldozer', 'Tractors', 'Trucks'], 
+      required: true
+    },
+    model: {
       type: String,
       required: true
     },
-
-    Manufacturer:{
-        type:String
-    },
-    Make:{
-        type: String
+    HullNumber:{
+      type: String, 
+      required:true 
     },
     date: {
       type: Date,
       default: Date.now
-    },
-    isDecomissioned:{
-        type: Boolean,
-        default: false
-    },
-    isOperational:{
-        type: Boolean,
-        default: true
-    },
-
-   
-
-    
-
-  
+    }, 
+    FuelLogs:{
+      type: Schema.Types.ObjectId,
+      ref:"fuellogs"
+    }
 });
 
-module.exports = Vehicles = mongoose.model('vehicles',VehicleSchema);
+module.exports = Vehicle = mongoose.model('vehicles', VehicleSchema);
