@@ -14,6 +14,10 @@ const CommentSchema = new Schema({
     date: {
       type: Date,
       default: Date.now
+    },
+    maintenance:{
+      type: Schema.Types.ObjectId,
+      ref: "maintenances"
     }
 });
 

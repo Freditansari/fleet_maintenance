@@ -18,6 +18,9 @@ const FuelLogSchema = new Schema({
     total: {
         type: Number,
         required: true
+    }, 
+    vehicle:{
+        type: Schema.Types.ObjectId, ref:'vehicles'
     }
 });
 
