@@ -24,6 +24,10 @@ const MaintenanceSchema = new Schema({
     comments:[{
         type: Schema.Types.ObjectId,
         ref:"comments"
+    }],
+    costs:[{
+        type: Schema.Types.ObjectId,
+        ref: 'costs'
     }]
 });
 
