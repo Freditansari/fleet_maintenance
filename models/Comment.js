@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 
 const CommentSchema = new Schema({
-    name: {
+    user: {
       type: Schema.Types.ObjectId,
       ref:"users"
     },
@@ -18,6 +18,10 @@ const CommentSchema = new Schema({
     maintenance:{
       type: Schema.Types.ObjectId,
       ref: "maintenances"
+    },
+    issue:{
+      type: Schema.Types.ObjectId,
+      ref: "issues"
     }
 });
 

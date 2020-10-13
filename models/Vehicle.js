@@ -45,6 +45,14 @@ const VehicleSchema = new Schema({
       type:Schema.Types.ObjectId,
       ref: "maintenances"
     }], 
+    issues:[{
+      type:Schema.Types.ObjectId,
+      ref: "issues"
+    }], 
+    reminders:[{
+      type: Schema.Types.ObjectId,
+      ref: "reminders"
+    }],
     isDeleted: {
       type: Boolean,
       default: false,
