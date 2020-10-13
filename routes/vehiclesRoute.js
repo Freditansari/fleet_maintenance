@@ -18,14 +18,23 @@ router.get('/test', (req, res) => res.json({ msg: 'Vehicle Works' }));
 
 // @route   GET api/vehicle/
 // @desc    get all vehicles
-// @access  Public
+// @access  Private
 router.get('/', (req, res) => {
-    Vehicle.find({isDeleted: false}).populate('Issues').then(result =>{
+    Vehicle.find({isDeleted: false}).populate('issues').then(result =>{
         res.status(200).json(result);
     })
 
 })
 
+// @route   GET api/vehicle/
+// @desc    get a vehicle
+// @access  Private
+router.get('/id', (req, res) => {
+    Vehicle.findOne({_id : req.body.vehicle_id}).populate('issues').then(result =>{
+        res.status(200).json(result);
+    })
+
+})
 
 const countOperationalFleet = async(req, res, next) =>{
     let totalFleetCount;
