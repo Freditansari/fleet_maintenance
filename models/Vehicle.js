@@ -9,7 +9,7 @@ const VehicleSchema = new Schema({
     },
     type: {
       type: String,
-      enum: ['Excavators', 'Light Vehicles', 'Bulldozers', 'Tractors', 'Trucks'], 
+      enum: ['Excavators', 'Light Vehicles', 'Bulldozers', 'Tractors', 'Trucks', 'Others'], 
       required: true
     },
     model: {
@@ -18,7 +18,8 @@ const VehicleSchema = new Schema({
     },
     HullNumber:{
       type: String, 
-      required:true 
+      required:true, 
+      unique: true
     },
     date: {
       type: Date,

@@ -112,6 +112,112 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Vehicle Routes",
+			"item": [
+				{
+					"name": "test route ",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/vehicle/test",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"vehicle",
+								"test"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all vehicles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/vehicle/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"vehicle",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get operational vehicle",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/vehicle/isoperational",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"vehicle",
+								"isoperational"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "new vehicle",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Hino Ranges\",\n\t\"type\" : \"Excavators\",\n\t\"model\": \"2015\",\n\t\"hullnumber\": \"DT-001\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/vehicle/new",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"vehicle",
+								"new"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"protocolProfileBehavior": {}

@@ -21,6 +21,10 @@ const MaintenanceSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "vehicles"
     },
+    dueDate: {
+        type: Date,
+        default: ()=> Date.now() + 14*24*60*60*10000
+    },
     comments:[{
         type: Schema.Types.ObjectId,
         ref:"comments"
