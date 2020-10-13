@@ -12,7 +12,7 @@ const validateVehicleInput = require('../validators/Vehicle');
 
 const Vehicle = require('../models/Vehicle');
 const { response } = require('express');
-const { count } = require('../models/Vehicle');
+const { count, findOneAndUpdate } = require('../models/Vehicle');
 
 // @route   GET api/vehicle/test
 // @desc    Tests vehicle route
@@ -25,7 +25,7 @@ router.get('/test', (req, res) => res.json({ msg: 'Vehicle Works' }));
 // @desc    get all vehicles
 // @access  Public
 router.get('/', (req, res) => {
-    Vehicle.find().then(result =>{
+    Vehicle.find({isDeleted: false}).then(result =>{
         res.status(200).json(result);
     })
 
@@ -37,15 +37,19 @@ const countOperationalFleet = async(req, res, next) =>{
     let operationalFleetCount;
     let inMaintenanceCount
 
+
     try{
-        totalFleetCount = await Vehicle.countDocuments();
-        inMaintenanceCount =await Vehicle.countDocuments({inMaintenance: true})
-        operationalFleetCount = await Vehicle.countDocuments({isOperational : true})
+        totalFleetCount = await Vehicle.countDocuments({isDeleted : false});
+        inMaintenanceCount =await Vehicle.countDocuments({$and:[{inMaintenance: true}, {isDeleted: false}]})
+        operationalFleetCount = await Vehicle.countDocuments({$and:[{isOperational: true},{inMaintenance:false} ,{isDeleted: false}]})
+        nonOperationalFleetCount = await Vehicle.countDocuments({$and:[{isOperational: false},{inMaintenance:true} ,{isDeleted: false}]})
+        
+        // isDeletedCount = await Vehicle.countDocuments({isDeleted: true})
 
         result ={
             inOperation : operationalFleetCount,
             inMaintenance: inMaintenanceCount,
-            nonOperational : totalFleetCount - (operationalFleetCount + inMaintenanceCount),
+            nonOperational : nonOperationalFleetCount,
         }
      
 
@@ -66,10 +70,6 @@ router.get('/isoperational', (req, res) => {
                         return res.status(200).json(result);
                     })
                     .catch(error =>{ res.status(500).json(error)});
-
-    
-
-
 })
 
 
@@ -107,6 +107,37 @@ router.post('/new', (req, res) => {
         }
     })
 
+})
+
+// @route   POST api/vehicle/edit
+// @desc    edit a single vehicle 
+// @access  Private
+router.post('/edit', (req, res) => {
+    const { errors, isValid } = validateVehicleInput(req.body);
+
+    // Check Validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+ 
+    Vehicle.findByIdAndUpdate(req.body._id, req.body, {new: true})
+    .then(vehicle =>{
+        res.status(200).json(vehicle)
+    })
+    .catch(errors =>res.status(500).json(errors))
+
+})
+
+// @route   POST api/vehicle/delete
+// @desc    delete a single vehicle 
+// @access  Private
+router.post('/delete', (req, res) => {
+    
+    Vehicle
+    .findByIdAndUpdate({_id : req.body.id}, {"isDeleted": true})
+    .then(vehicle =>{
+        res.status(200).json(vehicle);
+    })
 })
 
 module.exports=router;

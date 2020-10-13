@@ -44,7 +44,11 @@ const VehicleSchema = new Schema({
     maintenances:[{
       type:Schema.Types.ObjectId,
       ref: "maintenances"
-    }]
+    }], 
+    isDeleted: {
+      type: Boolean,
+      default: false
+    }
 });
 
 module.exports = Vehicle = mongoose.model('vehicles', VehicleSchema);
