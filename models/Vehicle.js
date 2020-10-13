@@ -47,7 +47,7 @@ const VehicleSchema = new Schema({
     }], 
     isDeleted: {
       type: Boolean,
-      default: false
+      default: false,
     }
 });
 

@@ -109,6 +109,14 @@ router.post('/new', (req, res) => {
 
 })
 
+// @route   GET api/vehicle/types
+// @desc    get vehicle types end point
+// @access  Private
+router.get('/types', (req, res) => {
+    
+    res.status(200).json(Vehicle.schema.path('type').enumValues)
+})
+
 // @route   POST api/vehicle/edit
 // @desc    edit a single vehicle 
 // @access  Private
