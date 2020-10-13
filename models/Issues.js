@@ -3,14 +3,18 @@ const Schema = mongoose.Schema;
 const randomString = require("randomstring");
 
 const issueSchema = new Schema({
-    issueNumbers : {
-        type: String,
-        default: randomString.generate(7),
-        unique: true
-    },
+    // issueNumbers : {
+    //     type: String,
+    //     default: randomString.generate(7),
+    //     unique: true
+    // },
     vehicle: {
         type: Schema.Types.ObjectId,
-        ref: "vehicles"
+        ref: 'vehicles'
+    },
+    descriptions:{
+        type: String,
+        required: true
     },
     comments:[{
         type: Schema.Types.ObjectId,
@@ -28,9 +32,10 @@ const issueSchema = new Schema({
         type:Date
     },
     isOpen:{
-        type:Boolean
+        type:Boolean,
+        default: true
     }
 
 });
 
-module.exports = Issues = mongoose.model('issues', issueSchema);
+module.exports = Issues = mongoose.model('Issues', issueSchema);

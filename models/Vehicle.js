@@ -47,7 +47,7 @@ const VehicleSchema = new Schema({
     }], 
     issues:[{
       type:Schema.Types.ObjectId,
-      ref: "issues"
+      ref: "Issues"
     }], 
     reminders:[{
       type: Schema.Types.ObjectId,
@@ -59,4 +59,4 @@ const VehicleSchema = new Schema({
     }
 });
 
-module.exports = Vehicle = mongoose.model('vehicles', VehicleSchema);
+module.exports = Vehicle = mongoose.model('Vehicles', VehicleSchema);

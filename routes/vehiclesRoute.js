@@ -1,10 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const gravatar = require('gravatar');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const keys = require('../config/mongodb');
-const passport = require('passport');
 
 
 //todo load validations here. 
@@ -25,7 +20,7 @@ router.get('/test', (req, res) => res.json({ msg: 'Vehicle Works' }));
 // @desc    get all vehicles
 // @access  Public
 router.get('/', (req, res) => {
-    Vehicle.find({isDeleted: false}).then(result =>{
+    Vehicle.find({isDeleted: false}).populate('Issues').then(result =>{
         res.status(200).json(result);
     })
 
