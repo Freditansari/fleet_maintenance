@@ -12,7 +12,6 @@ const { count, findOneAndUpdate } = require('../models/Vehicle');
 // @route   GET api/vehicle/test
 // @desc    Tests vehicle route
 // @access  Public
-
 router.get('/test', (req, res) => res.json({ msg: 'Vehicle Works' }));
 
 

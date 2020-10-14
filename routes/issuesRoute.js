@@ -58,35 +58,7 @@ router.post('/new',passport.authenticate('jwt', { session: false }), (req, res) 
 
 })
 
-// @route   POST api/issues/comments/add
-// @desc    post vehicle types end point
-// @access  Private
-router.post('/comments/add', passport.authenticate('jwt', { session: false }), (req, res) => {
 
-    const addCommentsToIssue = async() =>{
-        try{
-            // console.log("hello")
-            const newComment = new Comment({
-                user: req.user._id,
-                comment : req.body.comment,
-                issue: req.body.issue_id,
-            })
-
-            const newCommentResult = await newComment.save();
-            const newCommentIssueResult = await Issues.update(
-                {_id: req.body.issue_id}, {$push:{comments: newCommentResult._id}}
-            )
-            res.status(200).json(newCommentResult)
-
-
-        }catch(error){
-            console.log(error)
-            res.status(500).json(error)
-        }
-    }
-    addCommentsToIssue();
-
-})
 
 
 module.exports=router;
