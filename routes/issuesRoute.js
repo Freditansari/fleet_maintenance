@@ -13,6 +13,7 @@ const { response } = require('express');
 
 const Issues = require('../models/Issues');
 const Comment = require ('../models/Comment')
+const User = require('../models/User')
 
 // @route   get api/issues/
 // @desc    get all available issues
@@ -31,8 +32,8 @@ router.get('/', (req, res) => {
 // @route   POST api/issues/new
 // @desc    post vehicle types end point
 // @access  Private
-router.post('/new', (req, res) => {
-    // Check Validation
+router.post('/new',passport.authenticate('jwt', { session: false }), (req, res) => {
+    // todo  Check Validation
 
    
     const createIssuesAndAddToVehicle= async() =>{
@@ -46,6 +47,7 @@ router.post('/new', (req, res) => {
 
             const newIssuesResult = await newIssues.save();
             const newIssuesVehicle = await Vehicles.update({_id: req.body.vehicle_id}, {$push:{issues: newIssuesResult._id}})
+            const newIssuesUser = await User.update({_id: res.user._id}, {$push:{issues: newIssuesResult._id}})
             res.status(200).json(newIssuesResult);
         }catch(error){
             res.status(500).json(error)

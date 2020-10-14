@@ -9,7 +9,8 @@ const passport = require('passport');
 
 
 const Issues = require('../models/Issues');
-const Comment = require ('../models/Comment')
+const Comment = require ('../models/Comment');
+const User = require('../models/User');
 
 
 // @route   POST api/comments/issues/add
@@ -30,7 +31,10 @@ router.post('/issues/add', passport.authenticate('jwt', { session: false }), (re
             const newCommentIssueResult = await Issues.update(
                 {_id: req.body.issue_id}, {$push:{comments: newCommentResult._id}}
             )
-            res.status(200).json(newCommentResult)
+            const newCommentUserResult = await User.update(
+                {_id: req.user._id}, {$push:{comments: newCommentResult._id}}
+            )
+            res.status(200).json(newCommentResult).json(newCommentIssueResult).json(newCommentUserResult)
 
 
         }catch(error){
