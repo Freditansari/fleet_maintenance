@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
 
 
 //todo load validations here. 
@@ -9,10 +10,23 @@ const router = express.Router();
 const Vehicles = require('../models/Vehicle');
 
 const { response } = require('express');
-const { count, findOneAndUpdate } = require('../models/Vehicle');
+
 const Issues = require('../models/Issues');
+const Comment = require ('../models/Comment')
 
+// @route   get api/issues/
+// @desc    get all available issues
+// @access  Private
+router.get('/', (req, res) => {
+        Issues.find().populate("comments")
+        .then(result =>{
+            res.status(200).json(result)
+        })
+        .catch(error =>{
+            res.status(500).json(error)
+        })
 
+})
 
 // @route   POST api/issues/new
 // @desc    post vehicle types end point
@@ -41,5 +55,36 @@ router.post('/new', (req, res) => {
     createIssuesAndAddToVehicle()
 
 })
+
+// @route   POST api/issues/comments/add
+// @desc    post vehicle types end point
+// @access  Private
+router.post('/comments/add', passport.authenticate('jwt', { session: false }), (req, res) => {
+
+    const addCommentsToIssue = async() =>{
+        try{
+            // console.log("hello")
+            const newComment = new Comment({
+                user: req.user._id,
+                comment : req.body.comment,
+                issue: req.body.issue_id,
+            })
+
+            const newCommentResult = await newComment.save();
+            const newCommentIssueResult = await Issues.update(
+                {_id: req.body.issue_id}, {$push:{comments: newCommentResult._id}}
+            )
+            res.status(200).json(newCommentResult)
+
+
+        }catch(error){
+            console.log(error)
+            res.status(500).json(error)
+        }
+    }
+    addCommentsToIssue();
+
+})
+
 
 module.exports=router;

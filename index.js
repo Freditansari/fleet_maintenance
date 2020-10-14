@@ -15,6 +15,7 @@ const users = require('./routes/usersRoute');
 
 const vehicle = require('./routes/vehiclesRoute');
 const issues = require('./routes/issuesRoute');
+const comments = require('./routes/commentsRoute');
 
 //path is used for production build
 const path = require('path');
@@ -22,6 +23,7 @@ const path = require('path');
 app.use('/api/users', users);
 app.use('/api/vehicle', vehicle);
 app.use('/api/issues', issues);
+app.use('/api/comments', comments);
 
 require('./config/passport')(passport);
 

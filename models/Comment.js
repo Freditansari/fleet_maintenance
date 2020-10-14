@@ -21,7 +21,7 @@ const CommentSchema = new Schema({
     },
     issue:{
       type: Schema.Types.ObjectId,
-      ref: "issues"
+      ref: "Issues"
     }
 });
 
