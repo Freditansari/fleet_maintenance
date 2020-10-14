@@ -29,6 +29,21 @@ router.get('/', (req, res) => {
 
 })
 
+// @route   get api/issues/open
+// @desc    get all open issues
+// @access  Private
+router.get('/open', (req, res) => {
+    Issues.find({isOpen: true})
+    .populate("comments")
+    .then(result =>{
+        res.status(200).json(result)
+    })
+    .catch(error =>{
+        res.status(500).json(error)
+    })
+
+})
+
 // @route   POST api/issues/new
 // @desc    post vehicle types end point
 // @access  Private
@@ -58,6 +73,7 @@ router.post('/new',passport.authenticate('jwt', { session: false }), (req, res) 
 
 })
 
+//todo route to add costs
 
 
 

@@ -20,6 +20,10 @@ const CostSchema = new Schema({
     Maintenance:{
         type: Schema.Types.ObjectId,
         ref: 'maintenances'
+    },
+    issue:{
+        type: Schema.Types.ObjectId,
+        ref: 'issues'
     }
 });
 

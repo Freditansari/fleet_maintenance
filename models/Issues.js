@@ -34,7 +34,11 @@ const issueSchema = new Schema({
     isOpen:{
         type:Boolean,
         default: true
-    }
+    },
+    costs:[{
+        type: Schema.Types.ObjectId,
+        ref: "costs"
+    }]
 
 });
 
