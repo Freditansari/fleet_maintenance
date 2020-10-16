@@ -19,7 +19,9 @@ const Vehicle = require('../models/Vehicle')
  * 
  */
 
-
+// @route   POST api/maintenance/new
+// @desc    add new maintenances
+// @access  Private
 router.post('/new', passport.authenticate('jwt', { session: false }), (req, res) => {
 
     const addNewMaintenance =async () =>{

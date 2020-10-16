@@ -20,6 +20,7 @@ const User = require('../models/User')
 // @access  Private
 router.get('/', (req, res) => {
         Issues.find().populate("comments")
+        .populate("costs")
         .then(result =>{
             res.status(200).json(result)
         })
@@ -35,6 +36,7 @@ router.get('/', (req, res) => {
 router.get('/open', (req, res) => {
     Issues.find({isOpen: true})
     .populate("comments")
+    .populate("costs")
     .then(result =>{
         res.status(200).json(result)
     })

@@ -9,7 +9,7 @@ const Maintenance = require('../models/Maintenance');
 // @route   POST api/costs/issue/add
 // @desc    add Costs to issue
 // @access  Private
-router.post('/costs/issue/add', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.post('/issue/add', passport.authenticate('jwt', { session: false }), (req, res) => {
 
     const addCostToIssue = async() =>{
         try {
@@ -23,7 +23,7 @@ router.post('/costs/issue/add', passport.authenticate('jwt', { session: false })
 
             const newIssueCostResult = await newIssueCost.save()
 
-            const addCostToIssue = await Issues.update({_id: req.body.issue_id},{$push :{ costs: newIssueCostResult._id }})
+            const addCostToIssue = await Issues.findByIdAndUpdate({_id: req.body.issue_id},{$push :{ costs: newIssueCostResult._id }})
 
             res.status(200).json(newIssueCostResult)
 
@@ -45,7 +45,7 @@ router.post('/costs/issue/add', passport.authenticate('jwt', { session: false })
 // @access  Private
 router.post('/costs/maintenance/add', passport.authenticate('jwt', { session: false }), (req, res) => {
 
-    const addCostToMaintenance =() =>{
+    const addCostToMaintenance =async () =>{
         try {
             const newMaintenanceCost = new Cost({
                 date : ((req.body.date)? req.body.date: Date.now()),
@@ -72,3 +72,5 @@ router.post('/costs/maintenance/add', passport.authenticate('jwt', { session: fa
   
 
 })
+
+module.exports=router;
