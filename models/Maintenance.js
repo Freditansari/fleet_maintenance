@@ -17,7 +17,26 @@ const MaintenanceSchema = new Schema({
         type: Boolean,
         default: false
     },
-    //todo comments 
+    vehicle:{
+        type: Schema.Types.ObjectId,
+        ref: "vehicles"
+    },
+    dueDate: {
+        type: Date,
+        // default: ()=> Date.now() + 14*24*60*60*1000
+    },
+    comments:[{
+        type: Schema.Types.ObjectId,
+        ref:"comments"
+    }],
+    costs:[{
+        type: Schema.Types.ObjectId,
+        ref: 'costs'
+    }],
+    Vehicle:{
+        type: Schema.Types.ObjectId,
+        ref: 'vehicles'
+    }
 });
 
 module.exports = Maintenance = mongoose.model('maintenances', MaintenanceSchema);

@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 
 const CommentSchema = new Schema({
-    name: {
+    user: {
       type: Schema.Types.ObjectId,
       ref:"users"
     },
@@ -14,6 +14,14 @@ const CommentSchema = new Schema({
     date: {
       type: Date,
       default: Date.now
+    },
+    maintenance:{
+      type: Schema.Types.ObjectId,
+      ref: "maintenances"
+    },
+    issue:{
+      type: Schema.Types.ObjectId,
+      ref: "Issues"
     }
 });
 

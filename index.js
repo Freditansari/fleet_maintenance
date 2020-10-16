@@ -9,15 +9,25 @@ const db = require('./config/mongodb').mongoURI;
 app.use(bodyParser.urlencoded({extended:false})); 
 app.use(bodyParser.json());
 
-mongoose.connect(db, { useFindAndModify: false, useNewUrlParser:true }).then(()=>console.log('Monggo db connected')).catch(err=>console.log(err));
+mongoose.connect(db, { useFindAndModify: false, useNewUrlParser:true ,useUnifiedTopology: true}).then(()=>console.log('Monggo db connected')).catch(err=>console.log(err));
 
 const users = require('./routes/usersRoute');
+
+const vehicle = require('./routes/vehiclesRoute');
+const issues = require('./routes/issuesRoute');
+const comments = require('./routes/commentsRoute');
+const maintenances = require('./routes/maintenanceRoute')
+const costs = require('./routes/costsRoute')
 
 //path is used for production build
 const path = require('path');
 
 app.use('/api/users', users);
-
+app.use('/api/vehicle', vehicle);
+app.use('/api/issues', issues);
+app.use('/api/comments', comments);
+app.use('/api/maintenance', maintenances)
+app.use('/api/costs', costs)
 
 require('./config/passport')(passport);
 
