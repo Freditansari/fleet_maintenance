@@ -19,7 +19,17 @@ router.get('/test', (req, res) => res.json({ msg: 'Vehicle Works' }));
 // @desc    get all vehicles
 // @access  Private
 router.get('/', (req, res) => {
-    Vehicle.find().populate('issues').populate({path: 'maintenances', match : {isClosed: false}}).then(result =>{
+    Vehicle
+    .find()
+    .populate({
+        path: 'issues',
+        match: {isOpen: true}
+    })
+    .populate({
+        path: 'maintenances',
+         match : {isClosed: false}
+        })
+    .then(result =>{
         res.status(200).json(result);
     })
 
