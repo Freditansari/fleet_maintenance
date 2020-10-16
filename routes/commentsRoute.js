@@ -46,7 +46,9 @@ router.post('/issues/add', passport.authenticate('jwt', { session: false }), (re
 
 })
 
-//todo maintenance route
+//todo maintenance comments route
+
+//todo delete comments
 
 
 module.exports=router;

@@ -19,6 +19,16 @@ router.get('/test', (req, res) => res.json({ msg: 'Vehicle Works' }));
 // @desc    get all vehicles
 // @access  Private
 router.get('/', (req, res) => {
+    Vehicle.find().populate('issues').populate({path: 'maintenances', match : {isClosed: false}}).then(result =>{
+        res.status(200).json(result);
+    })
+
+})
+
+// @route   GET api/vehicle/operational
+// @desc    get all vehicle 
+// @access  Private
+router.get('/operational', (req, res) => {
     Vehicle.find({isDeleted: false}).populate('issues').then(result =>{
         res.status(200).json(result);
     })
