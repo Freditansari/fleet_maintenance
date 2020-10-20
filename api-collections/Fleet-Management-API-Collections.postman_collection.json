@@ -453,6 +453,46 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "delete issues by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmODViMWYyY2E1OTMzMzc5YjUxMGRiOSIsIm5hbWUiOiJGcmVkeSBZdWRpYXdhbiIsInJvbGUiOiJFbXBsb3llZSIsImlhdCI6MTYwMzE1OTQzOSwiZXhwIjoxNjAzMjQ1ODM5fQ.UzMVwLeD0B3P_9ZXng9CPBpGk9GmIHg-oPTFMQARBAA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"issue_id\": \"5f85d8e3703749015ead6608\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/issues/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"issues",
+								"delete"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -495,6 +535,160 @@
 								"api",
 								"maintenance",
 								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add comment to maintenance",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmODViMWYyY2E1OTMzMzc5YjUxMGRiOSIsIm5hbWUiOiJGcmVkeSBZdWRpYXdhbiIsInJvbGUiOiJFbXBsb3llZSIsImlhdCI6MTYwMzE1OTQzOSwiZXhwIjoxNjAzMjQ1ODM5fQ.UzMVwLeD0B3P_9ZXng9CPBpGk9GmIHg-oPTFMQARBAA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"comment\": \"installed some stuff\",\n    \"maintenance_id\": \"5f8966db9927575cd21a251b\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/comments/maintenances/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"comments",
+								"maintenances",
+								"add"
+							]
+						},
+						"description": "to add comment to maintenance"
+					},
+					"response": []
+				},
+				{
+					"name": "get all open maintenance",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmODViMWYyY2E1OTMzMzc5YjUxMGRiOSIsIm5hbWUiOiJGcmVkeSBZdWRpYXdhbiIsInJvbGUiOiJFbXBsb3llZSIsImlhdCI6MTYwMzE1OTQzOSwiZXhwIjoxNjAzMjQ1ODM5fQ.UzMVwLeD0B3P_9ZXng9CPBpGk9GmIHg-oPTFMQARBAA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/maintenance/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"maintenance",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add costs to maintenance",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmODViMWYyY2E1OTMzMzc5YjUxMGRiOSIsIm5hbWUiOiJGcmVkeSBZdWRpYXdhbiIsInJvbGUiOiJFbXBsb3llZSIsImlhdCI6MTYwMzE1OTQzOSwiZXhwIjoxNjAzMjQ1ODM5fQ.UzMVwLeD0B3P_9ZXng9CPBpGk9GmIHg-oPTFMQARBAA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"bought a window panel \",\n    \"cost\" :\"100000\",\n    \"maintenance_id\": \"5f8966db9927575cd21a251b\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/costs/maintenance/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"costs",
+								"maintenance",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete maintenance by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmODViMWYyY2E1OTMzMzc5YjUxMGRiOSIsIm5hbWUiOiJGcmVkeSBZdWRpYXdhbiIsInJvbGUiOiJFbXBsb3llZSIsImlhdCI6MTYwMzE1OTQzOSwiZXhwIjoxNjAzMjQ1ODM5fQ.UzMVwLeD0B3P_9ZXng9CPBpGk9GmIHg-oPTFMQARBAA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"maintenance_id\": \"5f896653def7625c6ab662a3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/maintenance/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"maintenance",
+								"delete"
 							]
 						}
 					},
@@ -542,6 +736,43 @@
 								"costs",
 								"issue",
 								"add"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "get all comments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmODViMWYyY2E1OTMzMzc5YjUxMGRiOSIsIm5hbWUiOiJGcmVkeSBZdWRpYXdhbiIsInJvbGUiOiJFbXBsb3llZSIsImlhdCI6MTYwMzE1OTQzOSwiZXhwIjoxNjAzMjQ1ODM5fQ.UzMVwLeD0B3P_9ZXng9CPBpGk9GmIHg-oPTFMQARBAA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/comments/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"comments",
+								""
 							]
 						}
 					},

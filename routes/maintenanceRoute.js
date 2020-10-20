@@ -71,6 +71,43 @@ router.post('/new', passport.authenticate('jwt', { session: false }), (req, res)
 })
 
 
+// @route   GET api/maintenance/
+// @desc    get all maintenances
+// @access  Private
+router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+
+    Maintenance
+        .find({isClosed: false})
+        .populate("comments")
+        .populate("costs")
+        .then(result => res.status(200).json(result))
+        .catch(error => res.status(500).json(error))
+})
+
+
+// @route   POST api/maintenance/delete
+// @desc    delete a maintenance
+// @access  Private
+router.post('/delete',passport.authenticate('jwt', { session: false }), (req, res) => {   
+    //todo add validations 
+    const removeMaintenance = async() =>{
+        try {
+            const maintenanceDelete = await Maintenance.deleteOne({_id: req.body.maintenance_id})
+
+            res.status(200).json(maintenanceDelete)
+            // .then(result =>{
+            //     res.status(200).json(result)
+            // })
+            
+        } catch (error) {
+            res.status(500).json(error)
+        }
+        
+    }
+
+    removeMaintenance()
+
+})
 
 
 

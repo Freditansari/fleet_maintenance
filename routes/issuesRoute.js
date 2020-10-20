@@ -49,10 +49,7 @@ router.get('/open', (req, res) => {
 // @route   POST api/issues/new
 // @desc    post vehicle types end point
 // @access  Private
-router.post('/new',passport.authenticate('jwt', { session: false }), (req, res) => {
-    // todo  Check Validation
-
-   
+router.post('/new',passport.authenticate('jwt', { session: false }), (req, res) => {   
     const createIssuesAndAddToVehicle= async() =>{
         try {
             const newIssues = new Issues({
@@ -63,8 +60,12 @@ router.post('/new',passport.authenticate('jwt', { session: false }), (req, res) 
             })
 
             const newIssuesResult = await newIssues.save();
-            const newIssuesVehicle = await Vehicles.update({_id: req.body.vehicle_id}, {$push:{issues: newIssuesResult._id}})
-            const newIssuesUser = await User.update({_id: res.user._id}, {$push:{issues: newIssuesResult._id}})
+            const newIssuesVehicle = await Vehicles.update(
+                {_id: req.body.vehicle_id}, 
+                {$push:{issues: newIssuesResult._id}})
+            const newIssuesUser = await User.update(
+                {_id: res.user._id}, 
+                {$push:{issues: newIssuesResult._id}})
             res.status(200).json(newIssuesResult);
         }catch(error){
             res.status(500).json(error)
@@ -75,7 +76,26 @@ router.post('/new',passport.authenticate('jwt', { session: false }), (req, res) 
 
 })
 
-//todo route to add costs
+// @route   POST api/issues/delete
+// @desc    post vehicle types end point
+// @access  Private
+router.post('/delete',passport.authenticate('jwt', { session: false }), (req, res) => {   
+    
+    const removeIssues = async() =>{
+        try {
+            const issuesDelete = await Issues.deleteOne({_id: req.body.issue_id});
+            res.status(200).json(issuesDelete)
+            
+        } catch (error) {
+            res.status(500).json(error)
+        }
+        
+    }
+
+    removeIssues()
+
+})
+
 
 
 
