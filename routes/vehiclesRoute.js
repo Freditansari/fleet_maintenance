@@ -30,7 +30,7 @@ router.get('/', (req, res) => {
         //  match : {isClosed: false}
         })
     .populate("FuelLogs")
-
+    .populate("machineHours")
     .then(result =>{
         res.status(200).json(result);
     })

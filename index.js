@@ -19,6 +19,7 @@ const comments = require('./routes/commentsRoute');
 const maintenances = require('./routes/maintenanceRoute')
 const costs = require('./routes/costsRoute')
 const fuels = require('./routes/FuelLogsroute')
+const machinehours = require('./routes/machineHourRoute')
 
 //path is used for production build
 const path = require('path');
@@ -30,6 +31,7 @@ app.use('/api/comments', comments);
 app.use('/api/maintenance', maintenances)
 app.use('/api/costs', costs)
 app.use('/api/fuels', fuels)
+app.use('/api/machinehours', machinehours)
 
 require('./config/passport')(passport);
 
