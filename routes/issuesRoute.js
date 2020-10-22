@@ -13,7 +13,8 @@ const { response } = require('express');
 
 const Issues = require('../models/Issues');
 const Comment = require ('../models/Comment')
-const User = require('../models/User')
+const User = require('../models/User');
+const Cost = require('../models/Cost');
 
 // @route   get api/issues/
 // @desc    get all available issues
@@ -95,6 +96,44 @@ router.post('/delete',passport.authenticate('jwt', { session: false }), (req, re
     removeIssues()
 
 })
+
+
+// @route   POST api/issues/cost/remove
+// @desc    remove cost from an issues
+// @access  Private
+router.post('/cost/remove',passport.authenticate('jwt', { session: false }), (req, res) => {   
+    
+    const removeCost = async() =>{
+    
+        try {
+            const costDeleteResult = await Issues.updateOne(
+                {_id : req.body.issue_id},
+                {$pull: {costs: req.body.cost_id}},
+                {multi: "true"}
+                ).catch(error => res.status(500).json(error))
+            
+            const costDeleteDocument = await Cost.deleteOne(
+                {_id:req.body.cost_id}
+            )
+            
+            res.status(200).json(costDeleteResult);
+            
+
+        } catch (error) {
+            res.status(500).json(error)
+        }
+        
+    }
+
+    removeCost()
+
+})
+
+
+
+
+
+
 
 
 

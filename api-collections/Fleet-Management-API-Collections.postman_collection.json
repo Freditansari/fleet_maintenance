@@ -330,6 +330,16 @@
 				{
 					"name": "add a new issue",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmODViMWYyY2E1OTMzMzc5YjUxMGRiOSIsIm5hbWUiOiJGcmVkeSBZdWRpYXdhbiIsInJvbGUiOiJFbXBsb3llZSIsImlhdCI6MTYwMzMzMDY0MSwiZXhwIjoxNjAzNDE3MDQxfQ.4hD95uyOjdLWkhpR_1-2ot0eZF8fy1Cj6mTnJA1EnR8",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -493,6 +503,47 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "remove cost from issues",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmODViMWYyY2E1OTMzMzc5YjUxMGRiOSIsIm5hbWUiOiJGcmVkeSBZdWRpYXdhbiIsInJvbGUiOiJFbXBsb3llZSIsImlhdCI6MTYwMzMzODIyMywiZXhwIjoxNjAzNDI0NjIzfQ.BDfmi6bhfzFpanasAOoWlOuYpLIyvjUZUVXxfN_Roq0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cost_id\":\"5f90fffe5361ba29ac3f6df8\",\n    \"issue_id\":\"5f8eb0351a5fe60bef930361\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/issues/cost/remove",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"issues",
+								"cost",
+								"remove"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -508,7 +559,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmODViMWYyY2E1OTMzMzc5YjUxMGRiOSIsIm5hbWUiOiJGcmVkeSBZdWRpYXdhbiIsInJvbGUiOiJFbXBsb3llZSIsImlhdCI6MTYwMjgyODMxMiwiZXhwIjoxNjAyOTE0NzEyfQ.bx-3nJ2h-ShQEdIeytnNNJpyVhmzShdzOZvzhcFq4X4",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmODViMWYyY2E1OTMzMzc5YjUxMGRiOSIsIm5hbWUiOiJGcmVkeSBZdWRpYXdhbiIsInJvbGUiOiJFbXBsb3llZSIsImlhdCI6MTYwMzE1OTQzOSwiZXhwIjoxNjAzMjQ1ODM5fQ.UzMVwLeD0B3P_9ZXng9CPBpGk9GmIHg-oPTFMQARBAA",
 									"type": "string"
 								}
 							]
@@ -517,7 +568,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"descriptions\": \"potato spud change\",\n    \"vehicle_id\": \"5f85d8bf703749015ead6607\"\n}",
+							"raw": "{\n    \"descriptions\": \"Engine overhaul needed\",\n    \"vehicle_id\": \"5f85d8b6703749015ead6606\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -557,7 +608,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"comment\": \"installed some stuff\",\n    \"maintenance_id\": \"5f8966db9927575cd21a251b\"\n}",
+							"raw": "{\n    \"comment\": \"we're going to need some bolts\",\n    \"maintenance_id\": \"5f8e70f4b2be46c9fdf25830\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -584,19 +635,26 @@
 				},
 				{
 					"name": "get all open maintenance",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmODViMWYyY2E1OTMzMzc5YjUxMGRiOSIsIm5hbWUiOiJGcmVkeSBZdWRpYXdhbiIsInJvbGUiOiJFbXBsb3llZSIsImlhdCI6MTYwMzE1OTQzOSwiZXhwIjoxNjAzMjQ1ODM5fQ.UzMVwLeD0B3P_9ZXng9CPBpGk9GmIHg-oPTFMQARBAA",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmODViMWYyY2E1OTMzMzc5YjUxMGRiOSIsIm5hbWUiOiJGcmVkeSBZdWRpYXdhbiIsInJvbGUiOiJFbXBsb3llZSIsImlhdCI6MTYwMzMzODIyMywiZXhwIjoxNjAzNDI0NjIzfQ.BDfmi6bhfzFpanasAOoWlOuYpLIyvjUZUVXxfN_Roq0",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:5000/api/maintenance/",
 							"protocol": "http",
@@ -630,7 +688,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"description\": \"bought a window panel \",\n    \"cost\" :\"100000\",\n    \"maintenance_id\": \"5f8966db9927575cd21a251b\"\n}",
+							"raw": "{\n    \"description\": \"brought Penzoill 40-50 WD oil\",\n    \"cost\" :100,\n    \"maintenance_id\": \"5f8e7260db71b7ca1e3496ba\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -693,22 +751,16 @@
 						}
 					},
 					"response": []
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "costs routes",
-			"item": [
+				},
 				{
-					"name": "post add cost on issues",
+					"name": "delete cost in a maintenance by id",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmODViMWYyY2E1OTMzMzc5YjUxMGRiOSIsIm5hbWUiOiJGcmVkeSBZdWRpYXdhbiIsInJvbGUiOiJFbXBsb3llZSIsImlhdCI6MTYwMjgyODMxMiwiZXhwIjoxNjAyOTE0NzEyfQ.bx-3nJ2h-ShQEdIeytnNNJpyVhmzShdzOZvzhcFq4X4",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmODViMWYyY2E1OTMzMzc5YjUxMGRiOSIsIm5hbWUiOiJGcmVkeSBZdWRpYXdhbiIsInJvbGUiOiJFbXBsb3llZSIsImlhdCI6MTYwMzE1OTQzOSwiZXhwIjoxNjAzMjQ1ODM5fQ.UzMVwLeD0B3P_9ZXng9CPBpGk9GmIHg-oPTFMQARBAA",
 									"type": "string"
 								}
 							]
@@ -717,7 +769,136 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"description\": \"bought sonic screwdriver\",\n    \"cost\": 10000,\n    \"issue_id\": \"5f85d874703749015ead6605\"\n}",
+							"raw": "{\n    \"maintenance_id\": \"5f8e7260db71b7ca1e3496ba\",\n    \"cost_id\": \"5f8e728ddb71b7ca1e3496bb\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/maintenance/cost/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"maintenance",
+								"cost",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove comments from a maintenance",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmODViMWYyY2E1OTMzMzc5YjUxMGRiOSIsIm5hbWUiOiJGcmVkeSBZdWRpYXdhbiIsInJvbGUiOiJFbXBsb3llZSIsImlhdCI6MTYwMzE1OTQzOSwiZXhwIjoxNjAzMjQ1ODM5fQ.UzMVwLeD0B3P_9ZXng9CPBpGk9GmIHg-oPTFMQARBAA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"maintenance_id\": \"5f8e70f4b2be46c9fdf25830\",\n    \"comment_id\":\"5f8ea8fad1e50d0b82adea98\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/comments/maintenances/remove",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"comments",
+								"maintenances",
+								"remove"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update maintenance data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmODViMWYyY2E1OTMzMzc5YjUxMGRiOSIsIm5hbWUiOiJGcmVkeSBZdWRpYXdhbiIsInJvbGUiOiJFbXBsb3llZSIsImlhdCI6MTYwMzMzODIyMywiZXhwIjoxNjAzNDI0NjIzfQ.BDfmi6bhfzFpanasAOoWlOuYpLIyvjUZUVXxfN_Roq0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{        \n    \"is_closed\": false,\n    \"maintenance_id\": \"5f8e70b705006bc9b08b16ca\",\n    \"descriptions\": \"Banana Cellphone fix\",\n    \"vehicle_id\": \"5f85d8b6703749015ead6606\",\n    \"due_date\": \"2021-11-03T05:08:07.948Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/maintenance/edit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"maintenance",
+								"edit"
+							]
+						},
+						"description": "descriptions: req.body.descriptions,\nisClosed: req.body.is_closed,\nvehicle : req.body.vehicle_id,\ndueDate : req.body.due_date,\n_id: req.body.maintenance_id"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "costs routes",
+			"item": [
+				{
+					"name": "add cost on issues",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmODViMWYyY2E1OTMzMzc5YjUxMGRiOSIsIm5hbWUiOiJGcmVkeSBZdWRpYXdhbiIsInJvbGUiOiJFbXBsb3llZSIsImlhdCI6MTYwMzMzODIyMywiZXhwIjoxNjAzNDI0NjIzfQ.BDfmi6bhfzFpanasAOoWlOuYpLIyvjUZUVXxfN_Roq0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"need to buy some ramen noodle to fix the ding\",\n    \"cost\": 1000,\n    \"issue_id\": \"5f8eb0351a5fe60bef930361\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -736,6 +917,37 @@
 								"costs",
 								"issue",
 								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all costs",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmODViMWYyY2E1OTMzMzc5YjUxMGRiOSIsIm5hbWUiOiJGcmVkeSBZdWRpYXdhbiIsInJvbGUiOiJFbXBsb3llZSIsImlhdCI6MTYwMzE1OTQzOSwiZXhwIjoxNjAzMjQ1ODM5fQ.UzMVwLeD0B3P_9ZXng9CPBpGk9GmIHg-oPTFMQARBAA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/costs/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"costs",
+								""
 							]
 						}
 					},

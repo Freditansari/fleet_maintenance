@@ -23,12 +23,13 @@ router.get('/', (req, res) => {
     .find()
     .populate({
         path: 'issues',
-        match: {isOpen: true}
+        // match: {isOpen: true}
     })
     .populate({
         path: 'maintenances',
-         match : {isClosed: false}
+        //  match : {isClosed: false}
         })
+
     .then(result =>{
         res.status(200).json(result);
     })

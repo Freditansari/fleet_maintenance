@@ -13,6 +13,21 @@ const Maintenance = require('../models/Maintenance');
 
 // })
 
+
+// @route   GET api/costs/
+// @desc    get all costs 
+// @access  Private
+router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+
+    Cost
+    .find()
+    .then(result => res.status(200).json(result))
+    .catch(error =>res.status(500).json(error))
+
+})
+
+
+
 // @route   POST api/costs/issue/add
 // @desc    add Costs to issue
 // @access  Private

@@ -34,7 +34,7 @@ router.post('/issues/add', passport.authenticate('jwt', { session: false }), (re
 
     const addCommentsToIssue = async() =>{
         try{
-            // console.log("hello")
+     
             const newComment = new Comment({
                 user: req.user._id,
                 comment : req.body.comment,
@@ -90,7 +90,7 @@ router.post('/maintenances/add', passport.authenticate('jwt', { session: false }
             res.status(200).json(newCommentResult)
 
         }catch(error){
-            console.log(error)
+            // console.log(error)
             res.status(500).json(error)
         }
     }
@@ -98,8 +98,31 @@ router.post('/maintenances/add', passport.authenticate('jwt', { session: false }
 
 })
 
+// @route   DELETE api/comments/maintenances/remove
+// @desc    remove comments from maintenance
+// @access  Private
+router.delete('/maintenances/remove', passport.authenticate('jwt', { session: false }), (req, res) => {
 
-//todo delete comments
+    const removeCommentFromMaintenance = async() =>{
+        try{
+            const removeMaintenanceCommentsResult = await Maintenance.updateOne(
+                {_id: req.body.maintenance_id}, 
+                {$pull: {comments: req.body.comment_id}},
+                {"multi": true})
+
+            const removeMaintenanceCommentDocument = await Comment.deleteOne(
+                {_id: req.body.comment_id}
+            )
+            res.status(200).json(removeMaintenanceCommentsResult)
+
+        }catch(error){
+            res.status(500).json(error)
+        }
+    }
+    removeCommentFromMaintenance();
+
+})
+
 
 
 module.exports=router;
