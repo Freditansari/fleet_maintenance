@@ -13,7 +13,8 @@ const { response } = require('express');
 
 const Issues = require('../models/Issues');
 const Comment = require ('../models/Comment')
-const User = require('../models/User')
+const User = require('../models/User');
+const Cost = require('../models/Cost');
 
 // @route   get api/issues/
 // @desc    get all available issues
@@ -49,10 +50,7 @@ router.get('/open', (req, res) => {
 // @route   POST api/issues/new
 // @desc    post vehicle types end point
 // @access  Private
-router.post('/new',passport.authenticate('jwt', { session: false }), (req, res) => {
-    // todo  Check Validation
-
-   
+router.post('/new',passport.authenticate('jwt', { session: false }), (req, res) => {   
     const createIssuesAndAddToVehicle= async() =>{
         try {
             const newIssues = new Issues({
@@ -63,8 +61,12 @@ router.post('/new',passport.authenticate('jwt', { session: false }), (req, res) 
             })
 
             const newIssuesResult = await newIssues.save();
-            const newIssuesVehicle = await Vehicles.update({_id: req.body.vehicle_id}, {$push:{issues: newIssuesResult._id}})
-            const newIssuesUser = await User.update({_id: res.user._id}, {$push:{issues: newIssuesResult._id}})
+            const newIssuesVehicle = await Vehicles.update(
+                {_id: req.body.vehicle_id}, 
+                {$push:{issues: newIssuesResult._id}})
+            const newIssuesUser = await User.update(
+                {_id: res.user._id}, 
+                {$push:{issues: newIssuesResult._id}})
             res.status(200).json(newIssuesResult);
         }catch(error){
             res.status(500).json(error)
@@ -75,7 +77,64 @@ router.post('/new',passport.authenticate('jwt', { session: false }), (req, res) 
 
 })
 
-//todo route to add costs
+// @route   POST api/issues/delete
+// @desc    post vehicle types end point
+// @access  Private
+router.post('/delete',passport.authenticate('jwt', { session: false }), (req, res) => {   
+    
+    const removeIssues = async() =>{
+        try {
+            const issuesDelete = await Issues.deleteOne({_id: req.body.issue_id});
+            res.status(200).json(issuesDelete)
+            
+        } catch (error) {
+            res.status(500).json(error)
+        }
+        
+    }
+
+    removeIssues()
+
+})
+
+
+// @route   POST api/issues/cost/remove
+// @desc    remove cost from an issues
+// @access  Private
+router.post('/cost/remove',passport.authenticate('jwt', { session: false }), (req, res) => {   
+    
+    const removeCost = async() =>{
+    
+        try {
+            const costDeleteResult = await Issues.updateOne(
+                {_id : req.body.issue_id},
+                {$pull: {costs: req.body.cost_id}},
+                {multi: "true"}
+                ).catch(error => res.status(500).json(error))
+            
+            const costDeleteDocument = await Cost.deleteOne(
+                {_id:req.body.cost_id}
+            )
+            
+            res.status(200).json(costDeleteResult);
+            
+
+        } catch (error) {
+            res.status(500).json(error)
+        }
+        
+    }
+
+    removeCost()
+
+})
+
+
+
+
+
+
+
 
 
 

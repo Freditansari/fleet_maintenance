@@ -11,10 +11,10 @@ const MachineHourSchema = new Schema({
         type: Number,
         default: 0
     },
-    totalMachineHour: {
-        type: Number,
-        default: 0
-    },
+    // totalMachineHour: {
+    //     type: Number,
+    //     default: 0
+    // },
     Descriptions: {
         type: String, 
 

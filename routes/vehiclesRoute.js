@@ -23,12 +23,14 @@ router.get('/', (req, res) => {
     .find()
     .populate({
         path: 'issues',
-        match: {isOpen: true}
+        // match: {isOpen: true}
     })
     .populate({
         path: 'maintenances',
-         match : {isClosed: false}
+        //  match : {isClosed: false}
         })
+    .populate("FuelLogs")
+    .populate("machineHours")
     .then(result =>{
         res.status(200).json(result);
     })
@@ -39,7 +41,10 @@ router.get('/', (req, res) => {
 // @desc    get all vehicle 
 // @access  Private
 router.get('/operational', (req, res) => {
-    Vehicle.find({isDeleted: false}).populate('issues').then(result =>{
+    Vehicle.find({isDeleted: false})
+    .populate('issues')
+    .populate('maintenances')
+    .populate('fuellogs').then(result =>{
         res.status(200).json(result);
     })
 
