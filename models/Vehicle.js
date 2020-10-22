@@ -25,10 +25,10 @@ const VehicleSchema = new Schema({
       type: Date,
       default: Date.now
     }, 
-    FuelLogs:{
+    FuelLogs:[{
       type: Schema.Types.ObjectId,
       ref:"fuellogs"
-    },
+    }],
     isOperational:{
       type: Boolean,
       default: true
